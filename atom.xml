@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>佳庆的博客</title>
+  
+  <subtitle>纵使通篇bug，余亦hello world</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://nickit1050.github.io/"/>
+  <updated>2020-04-07T08:50:48.183Z</updated>
+  <id>https://nickit1050.github.io/</id>
+  
+  <author>
+    <name>聂佳庆</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>准程序员小N的第一篇博客</title>
+    <link href="https://nickit1050.github.io/2020/04/07/%E5%87%86%E7%A8%8B%E5%BA%8F%E5%91%98%E5%B0%8FN%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+    <id>https://nickit1050.github.io/2020/04/07/%E5%87%86%E7%A8%8B%E5%BA%8F%E5%91%98%E5%B0%8FN%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</id>
+    <published>2020-04-07T06:35:33.000Z</published>
+    <updated>2020-04-07T08:50:48.183Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+    
+      <category term="init" scheme="https://nickit1050.github.io/categories/init/"/>
+    
+    
+      <category term="心路" scheme="https://nickit1050.github.io/tags/%E5%BF%83%E8%B7%AF/"/>
+    
+  </entry>
+  
+</feed>
