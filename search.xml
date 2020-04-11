@@ -19,4 +19,75 @@
         <tag>心路</tag>
       </tags>
   </entry>
+  <entry>
+    <title>浅谈类和对象</title>
+    <url>/2020/04/12/%E6%B5%85%E8%B0%88%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/</url>
+    <content><![CDATA[<h1 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在学习java之前也接触过一些编程语言，比如c，c++，python等。记得最开始学习他们的时候，无论是老师教还是自学，都是从写hello world开始的，相信大多数编程人员都深有同感。正当我抱着hello java的心态去上第一节课的时候，就惨遭现实打脸。整整2个小时的大课，老师从未提及过hello world，相反，他一直反复地灌输类和对象的概念。正因如此反常，才导致我听得十分投入。后来随着对java的深入学习，我才逐渐明白的老师的良苦用心——毕竟，在java当中，类和对象贯穿始终。话不多说，开始回归正题，到底什么是类，什么又是对象[ : ( ]呢？</p>
+<h2 id="类（Class）"><a href="#类（Class）" class="headerlink" title="类（Class）"></a>类（Class）</h2><p>作为一个追求严谨学术的学子，对待一个新的名词，应当首先理解其概念。度娘上是这么说的——类是现实世界或思维世界中的实体在计算机中的反映，它将数据以及这些数据上的操作封装在一起。 （我似乎明白了百度近年来逐渐没落的原因）如此一个概念解读着实晦涩难懂。我们再来看看菜鸟教程是如何说的——类是一个模板，它描述一类对象的行为和状态。 这么一看，似乎理解了一些。原来类起到了一个模版的作用，通俗来讲，它定义了一类“志同道合的小伙伴”的行为和属性，其大体上分为数据域（field）和方法（method）。一下就是小N所写的一个类。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class Person &#123;</span><br><span class="line">    <span class="comment">// 以下两个变量即为数据域，分别为名字和ID。</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该类的构造器(constructor),用于创造Person类的实例对象。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, String id)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.name = name;</span><br><span class="line">      <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 此方法用于改名。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeName</span><span class="params">(String newName)</span> </span>&#123;</span><br><span class="line">      name = newName;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//此处略去其他方法。。。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果还不是那么容易理解，等对象的概念提出以后，将二者进行横向联系就会豁然开朗的。</p>
+<h2 id="对象（Object）"><a href="#对象（Object）" class="headerlink" title="对象（Object）"></a>对象（Object）</h2><p>首先需要阐明的是，此对象（object）非彼对象（spouse），它同样是一个计算机领域的概念。“对象是具有类类型的变量。”（百度百科） 同样亦可以理解为对象是类的实例（instance）。就拿上面的Person类来举例，我们得到一个叫做“人”的类，那么在这个类中，数据域包括人的名字(name)以及ID。那么当具体到某个人，比如“法外狂徒”张三，就是这个类的一个实例，也是具有这个类——Person类型的一个对象。因此，我们可以这般理解，类是具有一定集合意义的，是抽象的，不针对某一个<strong>具体</strong>的事物。相比之下，对象就是专指”<strong>类</strong>“所对应的具体的实例。</p>
+<table>
+<thead>
+<tr>
+<th>类(Class)</th>
+<th>抽象的，具有一定集合意义</th>
+<th>人</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>对象(Object)</strong></td>
+<td><strong>具象的，特指某一个事物</strong></td>
+<td><strong>张三</strong></td>
+</tr>
+</tbody></table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>类是一个模板，它描述一类对象的行为和状态，它往往是抽象的。对象是具有类类型的变量，它是具体的，特指某一个事物。不仅仅是学习java，对于学习面向对象的其他编程语言的初学者来说，理解并能区分类和对象这一概念尤为重要！希望小N的讲解能够对读者有所启发。最后，小N附上一个关于更多类和对象例子的表格，供读者参考。</p>
+<table>
+<thead>
+<tr>
+<th>类(class)</th>
+<th>对象(object)</th>
+<th>数据域(field)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>汽车品牌</td>
+<td>奇瑞，比亚迪，宝马，奔驰，奥迪。。</td>
+<td>品牌名，所属国家。。</td>
+</tr>
+<tr>
+<td>朝代</td>
+<td>唐，宋，元，明，清。。</td>
+<td>朝代名，起始年份。。</td>
+</tr>
+<tr>
+<td>人</td>
+<td>张三， 李四， 王二麻子。。。</td>
+<td>姓名，ID。。</td>
+</tr>
+<tr>
+<td>小说</td>
+<td>悲惨世界， 巴黎圣母院， 平凡的世界。。</td>
+<td>书名，作者，出版日期。。</td>
+</tr>
+<tr>
+<td>城市</td>
+<td>北京， 上海， 广州， 深圳。。</td>
+<td>城市名称，城市级别，领导人。。</td>
+</tr>
+<tr>
+<td>编程语言</td>
+<td>C, C++, Python, Java…</td>
+<td>名称，创始人，创始时间，是否面向对象。</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>概念理解</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
 </search>

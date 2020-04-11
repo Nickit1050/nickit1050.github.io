@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://nickit1050.github.io/"/>
-  <updated>2020-04-07T08:50:48.183Z</updated>
+  <updated>2020-04-11T16:13:09.532Z</updated>
   <id>https://nickit1050.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>浅谈类和对象</title>
+    <link href="https://nickit1050.github.io/2020/04/12/%E6%B5%85%E8%B0%88%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/"/>
+    <id>https://nickit1050.github.io/2020/04/12/%E6%B5%85%E8%B0%88%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/</id>
+    <published>2020-04-11T16:08:30.000Z</published>
+    <updated>2020-04-11T16:13:09.532Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+    
+      <category term="概念理解" scheme="https://nickit1050.github.io/categories/%E6%A6%82%E5%BF%B5%E7%90%86%E8%A7%A3/"/>
+    
+    
+      <category term="Java" scheme="https://nickit1050.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>准程序员小N的第一篇博客</title>
     <link href="https://nickit1050.github.io/2020/04/07/%E5%87%86%E7%A8%8B%E5%BA%8F%E5%91%98%E5%B0%8FN%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
     <id>https://nickit1050.github.io/2020/04/07/%E5%87%86%E7%A8%8B%E5%BA%8F%E5%91%98%E5%B0%8FN%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</id>
     <published>2020-04-07T06:35:33.000Z</published>
-    <updated>2020-04-07T08:50:48.183Z</updated>
+    <updated>2020-04-11T16:04:36.886Z</updated>
     
     <summary type="html">
     
