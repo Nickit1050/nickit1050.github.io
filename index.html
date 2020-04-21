@@ -73,6 +73,124 @@
     
     
     
+    <article id="post-重载与重写" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/21/%E9%87%8D%E8%BD%BD%E4%B8%8E%E9%87%8D%E5%86%99/"
+    >理解重载(Overload)与重写(Override)</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/21/%E9%87%8D%E8%BD%BD%E4%B8%8E%E9%87%8D%E5%86%99/" class="article-date">
+  <time datetime="2020-04-21T05:30:00.000Z" itemprop="datePublished">2020-04-21</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%A6%82%E5%BF%B5%E7%90%86%E8%A7%A3/">概念理解</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h1 id="理解重载-Overload-与重写-Override"><a href="#理解重载-Overload-与重写-Override" class="headerlink" title="理解重载(Overload)与重写(Override)"></a>理解重载(Overload)与重写(Override)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在学习以java为代表的面向对象的编程语言的过程中，理解重载和重写极其重要。众所周知，java的三大特性是继承，封装和多态。然而重载和重写分别涉及到java的多态和继承这两大特性，再加上其广泛的运用。由此，其重要性不言而喻。今天，小N就来谈一谈自己是如何理解重载和重写的，希望对读者能有所启发。</p>
+<h2 id="重载-Overload"><a href="#重载-Overload" class="headerlink" title="重载(Overload)"></a>重载(Overload)</h2><p>重载（Overload）通常是指在一个类（Class）当中，方法（method）名字相同但参数（parameter）不同。重载对返回值类型和修饰符没有限制，其可以相同也可以不同。注意，这里所说的参数所指的是<strong>参数的类型</strong>，<strong>参数的数量</strong>以及<strong>参数的顺序</strong>。值得一提的是，构造函数（constructor）也是可以被重载的，这一点也是最常用的。现给定一个方法头（Header）——public int doSomething(int x)，以下列表将举例说明如何判断新的方法是否为已知方法的重载方法。</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>是否为重载方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>private void doSomething(int x)</td>
+<td>否，未改变参数列表，编译错误</td>
+</tr>
+<tr>
+<td>public int doSomething()</td>
+<td>是，参数的数量变化</td>
+</tr>
+<tr>
+<td>public int doSomething(String x)</td>
+<td>是，参数的类型变化</td>
+</tr>
+<tr>
+<td>public int doSomething(int y)</td>
+<td>否，未改变参数列表，编译错误</td>
+</tr>
+</tbody></table>
+<p>上表中，相信前三个都很容易理解，第四个有一些tricky，看似参数改变了，其实只是改变了变量名，参数类型依旧没有改变，因此第四个并不能称为重载方法。</p>
+<h2 id="重写-Override"><a href="#重写-Override" class="headerlink" title="重写(Override)"></a>重写(Override)</h2><p>重写（Override）是子类（subclass）对父类（superclass）中可访问的方法的内容进行重新编写，返回值和参数列表都不变。举一个不恰当的比喻，好比“挂羊头，卖狗肉”。在小N看来，重写有以下几大显著的优势：</p>
+<ol>
+<li>子类可以根据需要定义自己的行为从而实现父类的方法。</li>
+<li>在一定程度上可以起到简化代码的作用，避免对某些语句的滥用。</li>
+</ol>
+<p>假如我们现有“猪”，“狗”，“猫”这三个类，现在我们需要实现判断某个对象的叫声。正常情况下，可能会这么做：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sound</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// assume we can get one animal string of pigs, dogs and cats by calling getAnimal().</span></span><br><span class="line">        String animal = getAnimal();</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"pig"</span>.equals(animal))&#123;</span><br><span class="line">            System.out.println(<span class="string">"哼哼哼。。。"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"dog"</span>.equals(animal))&#123;</span><br><span class="line">            System.out.println(<span class="string">"汪汪汪。。。"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"喵喵喵。。。"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>诚然，当动物的种类很少的时候，这么做也不是很麻烦。但是随着其种类增多，代码的维护成本将大幅度上升，并且会造成if-statement的滥用。而重写就可以有效改善这个问题！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"动物可以发出叫声"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pig</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"哼哼哼。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"汪汪汪。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"喵喵喵。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sound</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">//assume we can get one animal object of pigs, dogs and cats by invoking getAnimal().</span></span><br><span class="line">        Animal animal = getAnimal();</span><br><span class="line">        animal.sound();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在主函数中我们仅仅用了一行代码就取代了上一种方法的诸多if语句，是不是感觉很简洁呢！而且，如果增加新的动物种类，我只需要定义新的Animal子类并重写sound方法，不需要对现有的主函数做任何修改。极大程度降低了维护代码的工作量，并方便维护人员定位未知的bug。</p>
+<p>注意事项：</p>
+<ol>
+<li>参数列表必须与被重写方法完全一致。</li>
+<li>在jdk1.7及以后，返回类型可以为被重写方法返回类型的子类（也就是说，可以不与被重写方法完全相同）。</li>
+<li>父类中声明为final和static的方法不能被重写。</li>
+<li>构造函数不能被重写。</li>
+<li>重写方法的访问权限不能比被重写方法的访问权限更低。</li>
+<li>如果需要在重写方法中调用父类中被重写方法，可使用super关键字（例如：super.sound();）</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>重载和重写都是java多态的不同体现。重载具体指在同一个类中方法名相同而参数列表不同的方法。而重写是指子类对父类方法的重构，主要改变方法的内容，其余基本不变。</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-浅谈类和对象" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -115,7 +233,7 @@
       
       <h1 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在学习java之前也接触过一些编程语言，比如c，c++，python等。记得最开始学习他们的时候，无论是老师教还是自学，都是从写hello world开始的，相信大多数编程人员都深有同感。正当我抱着hello java的心态去上第一节课的时候，就惨遭现实打脸。整整2个小时的大课，老师从未提及过hello world，相反，他一直反复地灌输类和对象的概念。正因如此反常，才导致我听得十分投入。后来随着对java的深入学习，我才逐渐明白的老师的良苦用心——毕竟，在java当中，类和对象贯穿始终。话不多说，开始回归正题，到底什么是类，什么又是对象[ : ( ]呢？</p>
 <h2 id="类（Class）"><a href="#类（Class）" class="headerlink" title="类（Class）"></a>类（Class）</h2><p>作为一个追求严谨学术的学子，对待一个新的名词，应当首先理解其概念。度娘上是这么说的——类是现实世界或思维世界中的实体在计算机中的反映，它将数据以及这些数据上的操作封装在一起。 （我似乎明白了百度近年来逐渐没落的原因）如此一个概念解读着实晦涩难懂。我们再来看看菜鸟教程是如何说的——类是一个模板，它描述一类对象的行为和状态。 这么一看，似乎理解了一些。原来类起到了一个模版的作用，通俗来讲，它定义了一类“志同道合的小伙伴”的行为和属性，其大体上分为数据域（field）和方法（method）。一下就是小N所写的一个类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Class Person &#123;</span><br><span class="line">    <span class="comment">// 以下两个变量即为数据域，分别为名字和ID。</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该类的构造器(constructor),用于创造Person类的实例对象。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, String id)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.name = name;</span><br><span class="line">      <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 此方法用于改名。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeName</span><span class="params">(String newName)</span> </span>&#123;</span><br><span class="line">      name = newName;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//此处略去其他方法。。。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 以下两个变量即为数据域，分别为名字和ID。</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该类的构造器(constructor),用于创造Person类的实例对象。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, String id)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.name = name;</span><br><span class="line">      <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 此方法用于改名。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeName</span><span class="params">(String newName)</span> </span>&#123;</span><br><span class="line">      name = newName;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//此处略去其他方法。。。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>如果还不是那么容易理解，等对象的概念提出以后，将二者进行横向联系就会豁然开朗的。</p>
 <h2 id="对象（Object）"><a href="#对象（Object）" class="headerlink" title="对象（Object）"></a>对象（Object）</h2><p>首先需要阐明的是，此对象（object）非彼对象（spouse），它同样是一个计算机领域的概念。“对象是具有类类型的变量。”（百度百科） 同样亦可以理解为对象是类的实例（instance）。就拿上面的Person类来举例，我们得到一个叫做“人”的类，那么在这个类中，数据域包括人的名字(name)以及ID。那么当具体到某个人，比如“法外狂徒”张三，就是这个类的一个实例，也是具有这个类——Person类型的一个对象。因此，我们可以这般理解，类是具有一定集合意义的，是抽象的，不针对某一个<strong>具体</strong>的事物。相比之下，对象就是专指”<strong>类</strong>“所对应的具体的实例。</p>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://nickit1050.github.io/"/>
-  <updated>2020-04-11T16:13:09.532Z</updated>
+  <updated>2020-04-21T05:30:52.956Z</updated>
   <id>https://nickit1050.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>理解重载(Overload)与重写(Override)</title>
+    <link href="https://nickit1050.github.io/2020/04/21/%E9%87%8D%E8%BD%BD%E4%B8%8E%E9%87%8D%E5%86%99/"/>
+    <id>https://nickit1050.github.io/2020/04/21/%E9%87%8D%E8%BD%BD%E4%B8%8E%E9%87%8D%E5%86%99/</id>
+    <published>2020-04-21T05:30:00.000Z</published>
+    <updated>2020-04-21T05:30:52.956Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+    
+      <category term="概念理解" scheme="https://nickit1050.github.io/categories/%E6%A6%82%E5%BF%B5%E7%90%86%E8%A7%A3/"/>
+    
+    
+      <category term="Java" scheme="https://nickit1050.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>浅谈类和对象</title>
     <link href="https://nickit1050.github.io/2020/04/12/%E6%B5%85%E8%B0%88%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/"/>
     <id>https://nickit1050.github.io/2020/04/12/%E6%B5%85%E8%B0%88%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/</id>
     <published>2020-04-11T16:08:30.000Z</published>
-    <updated>2020-04-11T16:13:09.532Z</updated>
+    <updated>2020-04-21T04:10:30.039Z</updated>
     
     <summary type="html">
     
