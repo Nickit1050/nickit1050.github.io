@@ -1,6 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>理解继承（inheritance）</title>
+    <url>/2020/04/22/%E7%BB%A7%E6%89%BF/</url>
+    <content><![CDATA[<h1 id="理解继承（inheritance）"><a href="#理解继承（inheritance）" class="headerlink" title="理解继承（inheritance）"></a>理解继承（inheritance）</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继承作为java这门编程语言的三大特性之一，可谓是面向对象编程的一块基石。可以毫不夸张地说，继承是java的灵魂，也是诸多面向对象编程语言的灵魂所在。由此，理解并掌握java的继承知识对于java初学者来说十分有必要，同样也为其日后的学习打下夯实的基础。</p>
+<h2 id="继承的概念"><a href="#继承的概念" class="headerlink" title="继承的概念"></a>继承的概念</h2><p>首先，继承是“<strong>类（class）</strong>”这一层面的行为。具体体现为从已知类——父类当中产生新的类——子类，子类继承父类的<strong>所有</strong>数据域和方法，并具有自己的扩展能力，即可以拥有自己独有的数据域和方法。</p>
+<p>就好比遗产和王位的继承——继承者将拥有被继承者所有的资产和地位，当然，继承者自己所特有的资产和地位依旧是它自己的。举个不恰当的例子，总不至于继承了老家的三分自留地，自己城里的房子就被剥夺了吧？</p>
+<h2 id="继承的格式"><a href="#继承的格式" class="headerlink" title="继承的格式"></a>继承的格式</h2><p>在java中我们通过extends关键字来声明类的继承，形式如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Superclass</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Subclass</span> <span class="keyword">extends</span> <span class="title">Superclass</span> </span>&#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="继承的优势"><a href="#继承的优势" class="headerlink" title="继承的优势"></a>继承的优势</h2><p>继承能够极大程度减少代码的重复，使代码可充分利用。同时降低了代码的维护成本。</p>
+<p>话不多说，先上代码。。。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    String id;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    String sex;</span><br><span class="line">    String teachingModule;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getID</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// constructors and other methods are omitted...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    String id;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    String sex;</span><br><span class="line">    <span class="keyword">int</span> grade;</span><br><span class="line">    String[] modules;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getID</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// constructors and other methods are omitted...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假如我们有以上两个类，老师和学生，通过仔细观察，我们发现这两个类中有相当一部分的内容是重复的。为了减少代码的重复，增强代码可重复使用性。我们可以将其中的相同部分提炼出来，创建一个新的类，并让这两个类共同继承于新的类。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    String id;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    String sex;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getID</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// constructors and other methods are omitted.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    String teachingModule;</span><br><span class="line">    <span class="comment">// constructors and methods are omitted.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> grade;</span><br><span class="line">    String[] modules;</span><br><span class="line">    <span class="comment">// constructors and methods are omitted.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="何时需要使用继承"><a href="#何时需要使用继承" class="headerlink" title="何时需要使用继承"></a>何时需要使用继承</h2><ol>
+<li>当发现几个类当中有一些共同的属性和方法导致代码重复的时候，就理应考虑是否可以将其放入一个公共的父类当中去。</li>
+<li>当发现2个类（A和B）之间存在“is-a”的关系，即“A是B”或者“B是A”的时候，它们之间便存在继承的可能性。例如上文代码中，Person和Student，Person和Teacher就存在这样的关系。</li>
+</ol>
+<h2 id="继承的几种形式"><a href="#继承的几种形式" class="headerlink" title="继承的几种形式"></a>继承的几种形式</h2><p>继承主要分为单继承，多继承，多重继承。</p>
+<p>单继承就是最简单的继承方式，即B继承A，Teacher继承Person…不同的类继承同一个类亦是合法的。</p>
+<p>多继承是指一个子类同时继承若干个父类，如同以下形式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">A</span>,<span class="title">B</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>请注意，多继承在java当中是不支持的！！！如若需要实现多继承的功能，在java中可以通过接口（interface）来实现。</p>
+<p>多重继承就像一个继承链，B继承A，C继承B，D继承C….这在java当中是合法的。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">B</span> </span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> <span class="keyword">extends</span> <span class="title">C</span> </span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="继承关键字"><a href="#继承关键字" class="headerlink" title="继承关键字"></a>继承关键字</h2><p>继承当中主要涉及到extends, implements, super, this以及final这些关键字。</p>
+<h3 id="extends关键字"><a href="#extends关键字" class="headerlink" title="extends关键字"></a>extends关键字</h3><p>在Java当中，每个类只能拥有一个父类，通过extends关键字来进行声明。相信读者在上文已经看到了许多例子，此处不在举例。值得关注的是，在java中所有的类都有一个共同的祖先类，即Object类。如果一个类没有继承别的类将默认继承Object类。</p>
+<h3 id="implements关键字"><a href="#implements关键字" class="headerlink" title="implements关键字"></a>implements关键字</h3><p>由于java只支持单一继承，因此如果想要实现多继承的功能，可以通过接口（interface）来实现。有关接口的详细知识我们日后再谈论。以下就让小N举一个简单的例子：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Mutable</span> </span>&#123;...&#125;</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Comparable</span> </span>&#123;...&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="keyword">implements</span> <span class="title">Mutable</span>, <span class="title">Comparable</span></span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="super和this关键字"><a href="#super和this关键字" class="headerlink" title="super和this关键字"></a>super和this关键字</h3><p>在子类中如果需要调用父类的可见数据域和方法，可通过super.fields或者super.method()来实现。如需调用父类的构造函数可以通过super()来实现。通常情况下，当且仅当父类和子类有同名实例变量或同名函数的时候才必须通过super关键字加以区分。而this则是指向自身的引用。可以用来区分同名局部变量和全局变量（实例变量）。</p>
+<h3 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h3><p>其作用正如其字面意思那般。final可以用以声明类，方法，变量。</p>
+<p>被final所声明的类是不能被继承的。例如java中常见的String类就是由final所声明，无法被继承的类。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;...&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;...&#125; <span class="comment">//此写法错误，被声明为final的类无法被继承！！！</span></span><br></pre></td></tr></table></figure>
+
+<p>被final所声明的方法是无法被子类重写的。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>&#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;...&#125; <span class="comment">//此写法错误，被声明为final的方法不可被重写！！！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>被final所声明的变量无法通过重新赋值的方式进行修改。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> PI = <span class="number">3.14</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        PI = <span class="number">3.1415926</span>; <span class="comment">//此写法错误，被声明为final的变量不可通过重新赋值来修改！！！</span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>子类并不会继承父类的构造函数，相反，子类会在自己的构造函数当中调用父类构造函数。如果你未曾在子类构造函数的第一行显式地调用父类的构造函数，那么虚拟机会隐式调用父类无参构造函数，即spuer（）。换而言之，如果父类的构造函数需要有参数传入，那么就需要在子类构造函数的<strong>第一个语句</strong>显式调用父类构造函数并传入对应的参数。需要注意的是，如果父类并没有无参构造函数，且子类也没有显式调用父类含参构造函数，那么编译器便会报错！因此，一个好的编程习惯就是在父类中添加一个无参构造函数，以免因忘记显式调用父类构造函数而出现编译错误。（这一点在多重继承的过程中尤为体现）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 父类构造函数无参</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//构造函数内容省略...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//以下语句可写可不写</span></span><br><span class="line">        <span class="keyword">super</span>(); </span><br><span class="line">        <span class="comment">//构造函数其他内容省略...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">C</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">super</span>(); <span class="comment">//未在子类构造函数第一个语句调用父类构造函数，此写法会导致编译错误！此写法错误。</span></span><br><span class="line">        <span class="comment">//构造函数其他内容省略...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 父类构造函数有参</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">A</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="comment">//构造函数内容省略...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">B</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 由于A 当中构造函数有参，因此必须在B的构造函数第一个语句显式调用A的构造函数并传入参数。</span></span><br><span class="line">        <span class="keyword">super</span>(x); <span class="comment">//此写法正确。</span></span><br><span class="line">        <span class="comment">//构造函数其他内容省略...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">C</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// jvm 会隐式调用super（），然而A当中没有无参构造函数，将导致编译错误！此写法错误。</span></span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">1</span>; </span><br><span class="line">        <span class="comment">//构造函数其他内容省略...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>java继承相关的知识还是挺多的，而且也都是十分重要的。初学者一定要理解每一个知识点，打好基础，以便日后可以走得更远，更轻松！</p>
+]]></content>
+      <categories>
+        <category>概念理解</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>理解重载(Overload)与重写(Override)</title>
+    <url>/2020/04/21/%E9%87%8D%E8%BD%BD%E4%B8%8E%E9%87%8D%E5%86%99/</url>
+    <content><![CDATA[<h1 id="理解重载-Overload-与重写-Override"><a href="#理解重载-Overload-与重写-Override" class="headerlink" title="理解重载(Overload)与重写(Override)"></a>理解重载(Overload)与重写(Override)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在学习以java为代表的面向对象的编程语言的过程中，理解重载和重写极其重要。众所周知，java的三大特性是继承，封装和多态。然而重载和重写分别涉及到java的多态和继承这两大特性，再加上其广泛的运用。由此，其重要性不言而喻。今天，小N就来谈一谈自己是如何理解重载和重写的，希望对读者能有所启发。</p>
+<h2 id="重载-Overload"><a href="#重载-Overload" class="headerlink" title="重载(Overload)"></a>重载(Overload)</h2><p>重载（Overload）通常是指在一个类（Class）当中，方法（method）名字相同但参数（parameter）不同。重载对返回值类型和修饰符没有限制，其可以相同也可以不同。注意，这里所说的参数所指的是<strong>参数的类型</strong>，<strong>参数的数量</strong>以及<strong>参数的顺序</strong>。值得一提的是，构造函数（constructor）也是可以被重载的，这一点也是最常用的。现给定一个方法头（Header）——public int doSomething(int x)，以下列表将举例说明如何判断新的方法是否为已知方法的重载方法。</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>是否为重载方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>private void doSomething(int x)</td>
+<td>否，未改变参数列表，编译错误</td>
+</tr>
+<tr>
+<td>public int doSomething()</td>
+<td>是，参数的数量变化</td>
+</tr>
+<tr>
+<td>public int doSomething(String x)</td>
+<td>是，参数的类型变化</td>
+</tr>
+<tr>
+<td>public int doSomething(int y)</td>
+<td>否，未改变参数列表，编译错误</td>
+</tr>
+</tbody></table>
+<p>上表中，相信前三个都很容易理解，第四个有一些tricky，看似参数改变了，其实只是改变了变量名，参数类型依旧没有改变，因此第四个并不能称为重载方法。</p>
+<h2 id="重写-Override"><a href="#重写-Override" class="headerlink" title="重写(Override)"></a>重写(Override)</h2><p>重写（Override）是子类（subclass）对父类（superclass）中可访问的方法的内容进行重新编写，返回值和参数列表都不变。举一个不恰当的比喻，好比“挂羊头，卖狗肉”。在小N看来，重写有以下几大显著的优势：</p>
+<ol>
+<li>子类可以根据需要定义自己的行为从而实现父类的方法。</li>
+<li>在一定程度上可以起到简化代码的作用，避免对某些语句的滥用。</li>
+</ol>
+<p>假如我们现有“猪”，“狗”，“猫”这三个类，现在我们需要实现判断某个对象的叫声。正常情况下，可能会这么做：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sound</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// assume we can get one animal string of pigs, dogs and cats by calling getAnimal().</span></span><br><span class="line">        String animal = getAnimal();</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"pig"</span>.equals(animal))&#123;</span><br><span class="line">            System.out.println(<span class="string">"哼哼哼。。。"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"dog"</span>.equals(animal))&#123;</span><br><span class="line">            System.out.println(<span class="string">"汪汪汪。。。"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"喵喵喵。。。"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>诚然，当动物的种类很少的时候，这么做也不是很麻烦。但是随着其种类增多，代码的维护成本将大幅度上升，并且会造成if-statement的滥用。而重写就可以有效改善这个问题！</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"动物可以发出叫声"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pig</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"哼哼哼。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"汪汪汪。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"喵喵喵。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sound</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">//assume we can get one animal object of pigs, dogs and cats by invoking getAnimal().</span></span><br><span class="line">        Animal animal = getAnimal();</span><br><span class="line">        animal.sound();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在主函数中我们仅仅用了一行代码就取代了上一种方法的诸多if语句，是不是感觉很简洁呢！而且，如果增加新的动物种类，我只需要定义新的Animal子类并重写sound方法，不需要对现有的主函数做任何修改。极大程度降低了维护代码的工作量，并方便维护人员定位未知的bug。</p>
+<p>注意事项：</p>
+<ol>
+<li>参数列表必须与被重写方法完全一致。</li>
+<li>在jdk1.7及以后，返回类型可以为被重写方法返回类型的子类（也就是说，可以不与被重写方法完全相同）。</li>
+<li>父类中声明为final和static的方法不能被重写。</li>
+<li>构造函数不能被重写。</li>
+<li>重写方法的访问权限不能比被重写方法的访问权限更低。</li>
+<li>如果需要在重写方法中调用父类中被重写方法，可使用super关键字（例如：super.sound();）</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>重载和重写都是java多态的不同体现。重载具体指在同一个类中方法名相同而参数列表不同的方法。而重写是指子类对父类方法的重构，主要改变方法的内容，其余基本不变。</p>
+]]></content>
+      <categories>
+        <category>概念理解</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>准程序员小N的第一篇博客</title>
     <url>/2020/04/07/%E5%87%86%E7%A8%8B%E5%BA%8F%E5%91%98%E5%B0%8FN%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h1 id="心路历程"><a href="#心路历程" class="headerlink" title="心路历程"></a>心路历程</h1><p>我为什么要创建这个博客？我为什么要创建这个博客！我为什么要创建这个博客。。。（灵魂级的拷问。。。）</p>
@@ -82,66 +209,6 @@
 <td>名称，创始人，创始时间，是否面向对象。</td>
 </tr>
 </tbody></table>
-]]></content>
-      <categories>
-        <category>概念理解</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>理解重载(Overload)与重写(Override)</title>
-    <url>/2020/04/21/%E9%87%8D%E8%BD%BD%E4%B8%8E%E9%87%8D%E5%86%99/</url>
-    <content><![CDATA[<h1 id="理解重载-Overload-与重写-Override"><a href="#理解重载-Overload-与重写-Override" class="headerlink" title="理解重载(Overload)与重写(Override)"></a>理解重载(Overload)与重写(Override)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在学习以java为代表的面向对象的编程语言的过程中，理解重载和重写极其重要。众所周知，java的三大特性是继承，封装和多态。然而重载和重写分别涉及到java的多态和继承这两大特性，再加上其广泛的运用。由此，其重要性不言而喻。今天，小N就来谈一谈自己是如何理解重载和重写的，希望对读者能有所启发。</p>
-<h2 id="重载-Overload"><a href="#重载-Overload" class="headerlink" title="重载(Overload)"></a>重载(Overload)</h2><p>重载（Overload）通常是指在一个类（Class）当中，方法（method）名字相同但参数（parameter）不同。重载对返回值类型和修饰符没有限制，其可以相同也可以不同。注意，这里所说的参数所指的是<strong>参数的类型</strong>，<strong>参数的数量</strong>以及<strong>参数的顺序</strong>。值得一提的是，构造函数（constructor）也是可以被重载的，这一点也是最常用的。现给定一个方法头（Header）——public int doSomething(int x)，以下列表将举例说明如何判断新的方法是否为已知方法的重载方法。</p>
-<table>
-<thead>
-<tr>
-<th>Header</th>
-<th>是否为重载方法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>private void doSomething(int x)</td>
-<td>否，未改变参数列表，编译错误</td>
-</tr>
-<tr>
-<td>public int doSomething()</td>
-<td>是，参数的数量变化</td>
-</tr>
-<tr>
-<td>public int doSomething(String x)</td>
-<td>是，参数的类型变化</td>
-</tr>
-<tr>
-<td>public int doSomething(int y)</td>
-<td>否，未改变参数列表，编译错误</td>
-</tr>
-</tbody></table>
-<p>上表中，相信前三个都很容易理解，第四个有一些tricky，看似参数改变了，其实只是改变了变量名，参数类型依旧没有改变，因此第四个并不能称为重载方法。</p>
-<h2 id="重写-Override"><a href="#重写-Override" class="headerlink" title="重写(Override)"></a>重写(Override)</h2><p>重写（Override）是子类（subclass）对父类（superclass）中可访问的方法的内容进行重新编写，返回值和参数列表都不变。举一个不恰当的比喻，好比“挂羊头，卖狗肉”。在小N看来，重写有以下几大显著的优势：</p>
-<ol>
-<li>子类可以根据需要定义自己的行为从而实现父类的方法。</li>
-<li>在一定程度上可以起到简化代码的作用，避免对某些语句的滥用。</li>
-</ol>
-<p>假如我们现有“猪”，“狗”，“猫”这三个类，现在我们需要实现判断某个对象的叫声。正常情况下，可能会这么做：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sound</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// assume we can get one animal string of pigs, dogs and cats by calling getAnimal().</span></span><br><span class="line">        String animal = getAnimal();</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"pig"</span>.equals(animal))&#123;</span><br><span class="line">            System.out.println(<span class="string">"哼哼哼。。。"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"dog"</span>.equals(animal))&#123;</span><br><span class="line">            System.out.println(<span class="string">"汪汪汪。。。"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"喵喵喵。。。"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>诚然，当动物的种类很少的时候，这么做也不是很麻烦。但是随着其种类增多，代码的维护成本将大幅度上升，并且会造成if-statement的滥用。而重写就可以有效改善这个问题！</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"动物可以发出叫声"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pig</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"哼哼哼。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"汪汪汪。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"喵喵喵。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sound</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">//assume we can get one animal object of pigs, dogs and cats by invoking getAnimal().</span></span><br><span class="line">        Animal animal = getAnimal();</span><br><span class="line">        animal.sound();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在主函数中我们仅仅用了一行代码就取代了上一种方法的诸多if语句，是不是感觉很简洁呢！而且，如果增加新的动物种类，我只需要定义新的Animal子类并重写sound方法，不需要对现有的主函数做任何修改。极大程度降低了维护代码的工作量，并方便维护人员定位未知的bug。</p>
-<p>注意事项：</p>
-<ol>
-<li>参数列表必须与被重写方法完全一致。</li>
-<li>在jdk1.7及以后，返回类型可以为被重写方法返回类型的子类（也就是说，可以不与被重写方法完全相同）。</li>
-<li>父类中声明为final和static的方法不能被重写。</li>
-<li>构造函数不能被重写。</li>
-<li>重写方法的访问权限不能比被重写方法的访问权限更低。</li>
-<li>如果需要在重写方法中调用父类中被重写方法，可使用super关键字（例如：super.sound();）</li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>重载和重写都是java多态的不同体现。重载具体指在同一个类中方法名相同而参数列表不同的方法。而重写是指子类对父类方法的重构，主要改变方法的内容，其余基本不变。</p>
 ]]></content>
       <categories>
         <category>概念理解</category>
